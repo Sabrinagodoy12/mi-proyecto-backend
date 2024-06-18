@@ -11,8 +11,8 @@
     "stop-windows": "taskkill /F /IM node.exe",
     "lint": "eslint ./src --fix"
   },
-  "node-engines": {
-    "node": "16.x"
+  "engines": {
+    "node": ">=14.x"
   },
   "repository": {
     "url": "https://github.com/Sabrinagodoy12/mi-proyecto-backend.git"
