@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi app</title>
+</head>
+
+<body>
+    <h1>Productos</h1>
+
+    <form action="/api/products" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="title">Título</label>
+            <input type="text" name="title" id="title">
+        </div>
+        <div>
+            <label for="description">Descripción</label>
+            <input type="text" name="description" id="description">
+        </div>
+        <div>
+            <label for="price">Precio</label>
+            <input type="number" name="price" id="price">
+        </div>
+        <div>
+            <label for="code">Código</label>
+            <input type="text" name="code" id="code">
+        </div>
+        <div>
+            <label for="category">Categoría</label>
+            <input type="text" name="category" id="category">
+        </div>
+        <div>
+            <label for="file">Imagen</label>
+            <input type="file" name="file" id="file">
+        </div>
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+
+</html>
