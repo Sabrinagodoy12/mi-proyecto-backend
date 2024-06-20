@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
     res.send({ carts });
 });
 
-router.post("/", (req, res) => {
+router.post("/:id", (req, res) => {
     const { id, products } = req.body;
     const newCart = { id: Number(id), products };
 

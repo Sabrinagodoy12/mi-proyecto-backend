@@ -1,5 +1,3 @@
-console.log("holis");
-
 const socket = io();
 socket.on("connect", () => {
     console.log("Cliente conectado");

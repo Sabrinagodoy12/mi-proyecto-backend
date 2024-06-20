@@ -1,6 +1,5 @@
 const socket = io();
 const chatText = document.getElementById("message");
-const chatLogs = document.getElementById("message-Logs");
 let user = null;
 
 Swal.fire({
@@ -23,12 +22,15 @@ chatText.onkeyup = (event) => {
 };
 
 socket.on("message-logs", (data) => {
-    chatLogs.innerText = "";
+    if (!user) return;
 
-    data.messages.forEach((item) => {
+    const messageLogs = document.getElementById("message-logs");
+    messageLogs.innerText = "";
+
+    data.messages.forEach((message) => {
         const li = document.createElement("li");
-        li.innerHTML = `${item.user.name} dice: <b>${item.message}</b>`;
-        chatLogs.append(li);
+        li.innerHTML = `${message.user.name} dice: <b>${message.message}</b>`;
+        messageLogs.append(li);
     });
 });
 
