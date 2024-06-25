@@ -1,22 +1,34 @@
+/* eslint-disable camelcase */
 import { Router } from "express";
 
-const router = Router();
-const carts = [];
+import CartManager from "../managers/cartManager";
 
-router.get("/", (req, res) => {
-    res.send({ carts });
+const router = Router();
+const cartManager = new CartManager();
+
+// router.get("/", (req, res) => {
+//     res.render("carts", { title: "carts" });
+// });
+
+router.get("/", async (req, res) => {
+    const carts = await cartManager.readAll();
+    res.render({ carts });
 });
 
-router.post("/:id", (req, res) => {
-    const { id, products } = req.body;
-    const newCart = { id: Number(id), products };
+router.post("/", async (req, res) => {
+    const { id, id_product } = req.body;
+    const product = { id_product };
+    let cart = await carts.readOneId(id);
 
-    if(!id || !products){
-        return res.status(400).send({ "Error": "No se ha agregado ningún producto" });
+    if(cart){
+        cart.products.push(product);
+    }else{
+        cart = { id, products:[product] };
     }
-    carts.push(newCart);
 
-    res.status(201).send({ state: "success", data: cart });
+    await cartManager.persist(cart);
+
+    res.send({ status: true, cart });
 });
 
 router.delete("/api/carts/:id", ( req, res) => {

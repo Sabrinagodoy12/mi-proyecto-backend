@@ -2,17 +2,22 @@ import express from "express";
 import paths from "./utils/path.js";
 import products from "./products.js";
 import homeRouter from "./routes/home.router.js";
-import productRouter from "./routes/products.router.js";
 import serverSocketIO from "./config/socket.config.js";
 import configHandlebars from "./config/handlebars.config.js";
+import realTimeProducts from "./routes/realTimeProducts.router.js";
+// import cartsRouter from "./routes/carts.router.js";
 import chatRouter from "./routes/chat.router.js";
+import productRouter from "./routes/products.router.js";
 
 const PORT = 8080;
 const HOST = "localhost";
 const server = express();
 
+// server.use("/api/carts", cartsRouter);
+server.use("/realtimeproducts", realTimeProducts);
 server.use("/chat", chatRouter);
 server.use("/products", productRouter);
+server.use("/home", homeRouter);
 
 //Configuración de handlebars
 configHandlebars.config(server);
@@ -28,16 +33,12 @@ server.use("/api/public", express.static(paths.public));
 //     res.status(500).send("<h1>Error 404</h1><h3>Se ha generado un error en el servidor</h3>");
 // });
 
-server.use("/home", homeRouter);
-
 //Endpoint de productos
 server.get("/api/products", (req, res) => {
     const randomID = Math.floor(Math.random() * products.length);
     const product = products[randomID];
 
     res.render("products", { title: "productos", product });
-    // res.status(200).send({ state: "success", data: products });
-
 });
 
 const serverHTTP = server.listen(PORT, () => {
