@@ -5,7 +5,7 @@ import homeRouter from "./routes/home.router.js";
 import serverSocketIO from "./config/socket.config.js";
 import configHandlebars from "./config/handlebars.config.js";
 import realTimeProducts from "./routes/realTimeProducts.router.js";
-// import cartsRouter from "./routes/carts.router.js";
+import cartsRouter from "./routes/carts.router.js";
 import chatRouter from "./routes/chat.router.js";
 import productRouter from "./routes/products.router.js";
 
@@ -13,7 +13,7 @@ const PORT = 8080;
 const HOST = "localhost";
 const server = express();
 
-// server.use("/api/carts", cartsRouter);
+server.use("/carts", cartsRouter);
 server.use("/realtimeproducts", realTimeProducts);
 server.use("/chat", chatRouter);
 server.use("/products", productRouter);

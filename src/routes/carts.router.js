@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { Router } from "express";
 
-import CartManager from "../managers/cartManager";
+import CartManager from "../managers/cartManager.js";
 
 const router = Router();
 const cartManager = new CartManager();
